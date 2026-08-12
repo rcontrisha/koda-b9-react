@@ -1,3 +1,10 @@
+/**
+ * Component that contains a text field, acting as a search bar for searching pokemon data (by pokemon's name)
+ * @param {Object} props
+ * @param {String} props.value
+ * @param {import("react").Dispatch<import("react").SetStateAction<String>>} props.onChange 
+ * @returns 
+ */
 function SearchBar({ value, onChange }) {
   return (
     <form className="px-8 pt-4">

@@ -1,3 +1,14 @@
+/**
+ * Component to handle input product's data
+ * 
+ * @typedef {Object} Product
+ * @property {String} name
+ * @property {Number} stock
+ * 
+ * @param {Object} props
+ * @param {import("react").Dispatch<import("react").SetStateAction<Product[]>>} props.setProducts 
+ * @returns {JSX.Element}
+ */
 function ProductForm({ setProducts }) {
   return (
     <div className="max-w-fit">

@@ -1,3 +1,7 @@
+/**
+ * Function to fetch pokemon data from PokeAPI
+ * @returns 
+ */
 const fetchPokeData = async () => {
   const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=30");
 

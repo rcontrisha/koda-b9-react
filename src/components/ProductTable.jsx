@@ -1,3 +1,15 @@
+/**
+ * Component to show product's data as a table
+ *
+ * @typedef {Object} Product
+ * @property {String} name
+ * @property {Number} stock
+ *
+ * @param {Object} props
+ * @param {Product[]} props.products
+ * 
+ * @returns {JSX.Element}
+ */
 function ProductTable({ products }) {
   return (
     <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
@@ -11,11 +23,14 @@ function ProductTable({ products }) {
         <tbody>
           {products.map((product, idx) => {
             return (
-              <tr key={idx} className="bg-neutral-primary border-b border-default text-center">
+              <tr
+                key={idx}
+                className="bg-neutral-primary border-b border-default text-center"
+              >
                 <td className="px-6 py-4 border-r">{product.name}</td>
                 <td className="px-6 py-4">{product.stock}</td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>

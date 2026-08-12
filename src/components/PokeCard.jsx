@@ -1,3 +1,9 @@
+/**
+ * Component to show each of Pokemon's Data as a card
+ * @param {Object} props
+ * @param {Object} props.data 
+ * @returns 
+ */
 function PokeCard({ data }) {
   return (
     <article className="flex border border-gray-600 rounded-lg">

@@ -1,3 +1,14 @@
+/**
+ * Component that act as a form to receive user's feedback
+ * 
+ * @typedef {Object} Review
+ * @property {String} name
+ * @property {String} review
+ * 
+ * @param {Object} props
+ * @param {import("react").Dispatch<import("react").SetStateAction<Review[]>>} props.setReviews 
+ * @returns 
+ */
 function ReviewForm({ setReviews }) {
   return (
     <form

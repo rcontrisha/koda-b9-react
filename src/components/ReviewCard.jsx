@@ -1,3 +1,14 @@
+/**
+ * Component to show each feedback data as a card
+ * 
+ * @typedef {Object} Review
+ * @property {String} name
+ * @property {String} review
+ * 
+ * @param {Object} props
+ * @param {Review[]} props.review
+ * @returns 
+ */
 function ReviewCard({ reviews }) {
   if (reviews.length === 0) {
     return (
