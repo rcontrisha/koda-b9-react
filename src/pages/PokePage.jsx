@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import fetchPokeData from "../utils/fetchApi";
 import PokeCard from "../components/PokeCard";
 import SearchBar from "../components/SearchBar";
+import Header from "../components/Header";
 
 function PokePage() {
   const [data, setData] = useState([]);
@@ -47,6 +48,7 @@ function PokePage() {
 
   return (
     <>
+      <Header title={"Pokemon Data"} />
       <SearchBar value={filter} onChange={(e) => setFilter(e.target.value)} />
       <div className="px-8 py-4 grid grid-cols-4 gap-4">
         {data
