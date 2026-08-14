@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import fetchPokeData from "../utils/fetchApi";
 import PokeCard from "../components/PokeCard";
 import SearchBar from "../components/SearchBar";
@@ -6,12 +7,16 @@ import Header from "../components/Header";
 
 function PokePage() {
   const [data, setData] = useState([]);
-  const [filter, setFilter] = useState("");
+  const [types, setTypes] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get("name") || "";
+  const type = searchParams.get("type") || "";
 
   useEffect(() => {
     (async () => {
       try {
-        const url = "https://pokeapi.co/api/v2/pokemon?limit=30"
+        const url = "https://pokeapi.co/api/v2/pokemon?limit=100";
         const data = await fetchPokeData(url);
 
         // Fetch detail
@@ -41,6 +46,13 @@ function PokePage() {
         console.error(error);
       }
     })();
+
+    (async () => {
+      const url = "https://pokeapi.co/api/v2/type?limit=21";
+      const response = await fetchPokeData(url);
+      const { results } = response;
+      setTypes(results);
+    })();
   }, []);
 
   // const filteredData = filter
@@ -50,23 +62,53 @@ function PokePage() {
   return (
     <>
       <Header title={"Pokemon Data"} />
-      <SearchBar value={filter} onChange={(e) => setFilter(e.target.value)} />
+      <SearchBar
+        value={query}
+        onChange={(e) => {
+          const value = e.target.value
+
+          if (value) {
+            searchParams.set("name", value);
+          } else {
+            searchParams.delete("name"); 
+          }
+
+          setSearchParams(searchParams);
+        }}
+      />
+      <div className="flex flex-wrap gap-2 py-2 px-8">
+        {types.map((typeItem) => {
+          const isActive = type === typeItem.name;
+          return (
+            <div
+              className={`px-3 py-1 border border-gray-500 rounded-full cursor-pointer hover:bg-gray-500 hover:text-white ${
+                isActive ? "bg-gray-800 text-white" : ""
+              }`}
+              onClick={() => {
+                const next = new URLSearchParams(searchParams);
+                if (next.get("type") === typeItem.name) {
+                  next.delete("type");
+                } else {
+                  next.set("type", typeItem.name);
+                }
+                setSearchParams(next);
+              }}
+            >
+              {typeItem.name}
+            </div>
+          );
+        })}
+      </div>
       <div className="px-8 py-4 grid grid-cols-4 gap-4">
         {data
-          .filter((p) => p.name.includes(filter.toLowerCase()))
+          .filter((p) => {
+            const matchName = p.name.includes(query);
+            const matchType = !type || p.types.includes(type);
+            return matchName && matchType;
+          })
           .map((pokemon) => {
             return <PokeCard key={pokemon.id} data={pokemon} />;
           })}
-
-        {/* {filter ? data.filter((p) => p.name.includes(filter.toLowerCase())).map((pokemon) => {
-          return <PokeCard key={pokemon.id} data={pokemon} />;
-        }) : data.map((pokemon) => {
-          return <PokeCard key={pokemon.id} data={pokemon} />;
-        })} */}
-
-        {/* {filteredData.map((pokemon) => {
-          return <PokeCard key={pokemon.id} data={pokemon} />;
-        })} */}
       </div>
     </>
   );
