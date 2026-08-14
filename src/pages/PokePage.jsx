@@ -11,7 +11,8 @@ function PokePage() {
   useEffect(() => {
     (async () => {
       try {
-        const data = await fetchPokeData();
+        const url = "https://pokeapi.co/api/v2/pokemon?limit=30"
+        const data = await fetchPokeData(url);
 
         // Fetch detail
         const fetchDetail = data.results.map(async (detail) => {
