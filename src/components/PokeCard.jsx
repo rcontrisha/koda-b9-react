@@ -14,7 +14,7 @@ function PokeCard({ data }) {
         <div className="py-2">
           <p>{data.name}</p>
           <div className="flex gap-2">
-            {data["types"].map((type, idx) => {
+            {data["types"]?.map((type, idx) => {
               return (
                 <div key={idx} className="px-2 border-2 border-emerald-800 bg-emerald-400 rounded-full">
                   {type}
