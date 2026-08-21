@@ -18,7 +18,7 @@ const surveySlice = createSlice({
       return {
         ...prev,
         surveyData: prev.surveyData.filter((data) => {
-          return data.id !== payload;
+          return data.nama !== payload;
         }),
       };
     },

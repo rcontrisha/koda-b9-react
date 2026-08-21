@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { handleSubmit } from "../redux/slices/SurveySlice";
+import { handleSubmit, removeRow } from "../redux/slices/SurveySlice";
 import { useState } from "react";
 import Header from "../components/Header";
 
@@ -99,12 +99,13 @@ function Form() {
             </button>
           </div>
         </form>
-        <div className="grid grid-cols-5 auto-rows-min">
+        <div className="grid grid-cols-6 auto-rows-min">
           <div className="py-2">Nama</div>
           <div className="py-2">Umur</div>
           <div className="py-2">Jenis Kelamin</div>
           <div className="py-2">Hobi Nonton?</div>
           <div className="py-2">Genre</div>
+          <div className="py-2">Action</div>
 
           {state.surveyData.map((user) => {
             return (
@@ -114,6 +115,12 @@ function Form() {
                 <div className="py-2">{user.gender}</div>
                 <div className="py-2">{user.hobi}</div>
                 <div className="py-2">{user.genre.join(", ")}</div>
+                <button
+                  className="px-3 py-2 bg-red-500 text-white w-fit"
+                  onClick={() => dispatch(removeRow(user.nama))}
+                >
+                  Delete
+                </button>
               </>
             );
           })}
