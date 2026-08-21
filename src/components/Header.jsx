@@ -30,6 +30,9 @@ function Header({ title }) {
             <Link to={"/pokemon"}>Pokemon Data</Link>
           </li>
           <li>
+            <Link to={"/survey"}>Form Survey</Link>
+          </li>
+          <li>
             <Link to={"/profile"}>Profile</Link>
           </li>
         </ul>
