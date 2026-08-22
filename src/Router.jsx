@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import Form from "./pages/Form";
 import { Provider } from "react-redux";
 import reduxStore from "../src/redux/store";
+import TodoList from "./pages/TodoList";
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function Router() {
           </Route>
           <Route path="/profile" element={<Profile />} />
           <Route path="/survey" element={<Form />} />
+          <Route path="/todo" element={<TodoList />} />
         </Routes>
         <Footer />
       </Provider>
